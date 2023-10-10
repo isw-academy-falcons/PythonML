@@ -1,2 +1,2 @@
-# test
-This repository houses all QA activities carried out on the Skyfitzz app
+# pythonML
+This repository houses the python script which handles the outfit generator for the skyfitzz web application.
