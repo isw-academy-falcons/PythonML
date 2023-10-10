@@ -289,11 +289,23 @@ def display_clothing_matches():
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 
-@app.route('/random_dress', methods=['GET'])
+@app.route('/random_dress', methods=['GET', 'POST'])
 def select_random_dress():
-    if not dress_images:
+    global dress_images
+    # if not dress_images:
+    if request.method == 'GET':
         return jsonify({"message": "No dresses available"})
+    elif request.method == 'POST':
+        try:
+            data = request.get_json()
+            dress_images = data.get('dress_images', [])
 
+            selected_dress = random.choice(dress_images)
+            return jsonify({"selected_dress": selected_dress})
+        
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
+        
     selected_dress = random.choice(dress_images)
     return jsonify({"selected_dress": selected_dress})
 
